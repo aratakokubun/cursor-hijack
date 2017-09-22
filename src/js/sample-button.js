@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 import ActionTypes from './action/action-types';
 import assign from 'lodash.assign';
 import { isCursorInScope } from './utils/action-type-utils';
-import { simulateEvent } from './utils/cursor-simulator/cursor-simulator';
+import { simulateMouseEvent } from './services/event-simulator.service';
 import { searchRefElementAtCoordinate } from './services/search-element.service';
+
+import SampleButton1 from './sample-button1';
 
 class SampleButton extends React.Component {
 
@@ -30,30 +32,30 @@ class SampleButton extends React.Component {
   }
 
   render() {
-    const dom = this.refs.fugaInput;
-    // if (dom != undefined) {
-    //   console.log(dom);
-    //   simulatedClick(dom, { 
-    //   clientX: this.props.pos.left, clientY: this.props.pos.top,
-    //   screenX: this.props.pos.left, screenY: this.props.pos.top  
-    //   });
-    //   // dom.focus();
+    // const dom = this.refs.fugaInput;
+    // // if (dom != undefined) {
+    // //   console.log(dom);
+    // //   simulatedClick(dom, { 
+    // //   clientX: this.props.pos.left, clientY: this.props.pos.top,
+    // //   screenX: this.props.pos.left, screenY: this.props.pos.top  
+    // //   });
+    // //   // dom.focus();
+    // // }
+    // const event = this.props.event;
+    // if (dom != undefined && event != undefined) {
+    //   //  dom.dispatchEvent(event);
+    //   //  simulateMouseEvent(dom, event);
+    //   dom.focus();
+    //   dom.click();
     // }
-    const event = this.props.event;
-    if (dom != undefined && event != undefined) {
-      //  dom.dispatchEvent(event);
-      //  simulateEvent(dom, event);
-      dom.focus();
-      dom.click();
-      const coords = {x: event.clientX, y: event.clientY};
-      console.log(searchRefElementAtCoordinate(this.refs, coords));
+    if (this.refs.SampleButton1 != undefined) {
+      console.log(this.refs.SampleButton1.getWrappedInstance().refs);
     }
     return (
-      <div ref="SampleButton">
-        <form action="https://github.com/aratakokubun/cursor-jack" method="get"/>
-        {/*<input type="submit" name="submit" value="submit" onClick={confirm('jump to github page?')}/>*/}
+      <div>
         <input type="text" name="name" defaultValue="hoge" ref="hogeInput"/>
         <input type="text" name="name" defaultValue="fuga" ref="fugaInput"/>
+        <SampleButton1 ref="SampleButton1"/>
       </div>
     );
   }
@@ -78,4 +80,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     });
 };
 
-export default connect(mapStateToProps, null, mergeProps)(SampleButton);
+export default connect(mapStateToProps, null, mergeProps, {withRef: true})(SampleButton);

@@ -1,36 +1,53 @@
 // TODO: Unit Test
 
 import * as _ from 'lodash';
+import { ref2instance } from './ref-convert.service';
 
 /**
  * Get if element is at the coordinates.
- * @param {HTMLInputElement} ref 
+ * @param {HTMLElement} instance 
  * @param {x: number, y: number} absCoords : X and Y including Scroll
  * @return {true} if the coordinates in the element area, else {false}.
  */
-const isElementAtCoordinate = (ref, absCoords) => {
+const isElementAtCoordinate = (instance, absCoords) => {
   const elemArea = {
-    top: ref.offsetTop + ref.clientTop,
-    left: ref.offsetLeft + ref.clientLeft,
-    width: ref.clientWidth,
-    height: ref.clientHeight
+    top: instance.offsetTop + instance.clientTop,
+    left: instance.offsetLeft + instance.clientLeft,
+    width: instance.clientWidth,
+    height: instance.clientHeight
   }
   return elemArea.left <= absCoords.x && absCoords.x <= elemArea.left + elemArea.width &&
          elemArea.top <= absCoords.y && absCoords.y <= elemArea.top + elemArea.height;
 }
 
 /**
- * Search an element matched with specified coordinates condition.
- * @param {Array{HTMLInputElement}} refs 
- * @param {x: number, y: number} targetClientCoordinates : Client X and Y
- * @return {Array{HTMLInputElement}}. empty array if none of them matches condition.
+ * Search elements recursively.
+ * @param {Dict{HTMLElement}} refs 
+ * @param {x: number, y: number} absCoords : X and Y including Scroll
+ * @return {Dict{HTMLElement}}. empty if none of them matches condition.
  */
-export const searchRefElementAtCoordinate = (refs, targetClientCoordinates) =>  {
+const searchElementsRecursive = (refs, absCoords) => {
+  return _.map(refs, (ref) => {
+    const instance = ref2instance(ref);
+    if (!_.isEmpty(instance.refs)) {
+      return searchElementsRecursive(instance.refs, absCoords);
+    } else if(isElementAtCoordinate(instance, absCoords)) {
+      return ref;
+    }
+  });
+}
+
+/**
+ * Search elements matched with specified coordinates condition.
+ * {refs} are searched recursively.
+ * @param {Dict{HTMLElement}} refs 
+ * @param {x: number, y: number} targetClientCoordinates : Client X and Y
+ * @return {Dict{HTMLElement}}. empty if none of them matches condition.
+ */
+export const searchRefElementsAtCoordinate = (refs, targetClientCoordinates) =>  {
   const absCoords = {
     x: targetClientCoordinates.x + window.scrollX,
     y: targetClientCoordinates.y + window.scrollY
   };
-  return _.filter(refs, (ref) => (
-    isElementAtCoordinate(ref, absCoords)
-  ));
+  return searchElementsRecursive(refs, absCoords);
 }

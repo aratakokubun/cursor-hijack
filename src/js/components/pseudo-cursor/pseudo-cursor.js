@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import ActionTypes from '../../action/action-types';
 import assign from 'lodash.assign';
+import ActionTypes from '../../action/action-types';
 import { isCursorInScope } from '../../utils/action-type-utils';
 
 class PseudoCursor extends React.Component {
@@ -17,6 +17,7 @@ class PseudoCursor extends React.Component {
       zIndex: PropTypes.number.isRequired
     }),
     display: PropTypes.bool.isRequired,
+    debug: PropTypes.bool
   }
 
   constructor(props) {
@@ -40,7 +41,7 @@ class PseudoCursor extends React.Component {
       "height": this.props.pos.height,
       "zIndex": this.props.pos.zIndex,
       "display": this.props.display ? "inline" : "none",
-      "cursor": "none",
+      "cursor": this.props.debug ? "default" : "none",
       "background": "transparent",
       "KhtmlUserSelect": "none",
       "OUserSelect": "none",

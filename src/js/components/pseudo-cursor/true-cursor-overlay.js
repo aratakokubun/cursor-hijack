@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as MouseActionCreators from '../../action/cursor-action-creator'
+import { dispatchPseuduoEvent } from '../../services/cursor-event-dispatch.service';
 
 class TrueCursorOverlay extends React.Component {
-
+  // TODO: add all callback for mouse event
+  // TODO: add flag to disable hijack
   static propTypes = {
+    getAppRefs: PropTypes.func.isRequired,
     pos: PropTypes.shape({
       top: PropTypes.number.isRequired,
       left: PropTypes.number.isRequired,
@@ -18,10 +21,22 @@ class TrueCursorOverlay extends React.Component {
     createMouseOverAction: PropTypes.func,
     createMouseOutAction: PropTypes.func,
     createMouseClickAction: PropTypes.func,
+    debug: PropTypes.bool
   }
 
   constructor(props) {
     super(props);
+  }
+
+  _onMouseEvent = (event) => {
+    // TODO: call change cursor position callback
+    // FIXME: below is temporal test implemnetation
+    this.props.createMouseClickAction(event);
+    const targetCoordinates = {
+      x: event.clientX,
+      y: event.clientY
+    }
+    dispatchPseuduoEvent(event, targetCoordinates, this.props.getAppRefs());
   }
 
   render() {
@@ -33,13 +48,15 @@ class TrueCursorOverlay extends React.Component {
       "height": this.props.pos.heightPercent + "%",
       "zIndex": this.props.pos.zIndex,
       "background": "transparent",
-      "cursor": "none"
+      "cursor": this.props.debug ? "default" : "none",
     }
     return (
+      // TODO: Add all mouse event hook
+      // FIXME: below is temporal test implemnetation
       <div style={style}
         onMouseMove={event => this.props.createMouseMoveAction(event)}
         onMouseOver={event => this.props.createMouseOverAction(event)}
-        onClick={event => this.props.createMouseClickAction(event)}
+        onClick={event => this._onMouseEvent(event)}
         onMouseOut={event => this.props.createMouseOutAction(event)}>
       </div>
     );
