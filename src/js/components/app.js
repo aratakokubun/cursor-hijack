@@ -1,28 +1,39 @@
 import React from 'react';
 import { render } from 'react-dom';
-import FakeCusorImpl from './fake-cursor-impl';
-import TrueCursorOverlay from './fake-cursor/true-cursor-overlay';
+import PseudoCursor from './pseudo-cursor/pseudo-cursor';
+import TrueCursorOverlay from './pseudo-cursor/true-cursor-overlay';
 import { createMouseMoveAction, createMouseClickAction, createMouseNoneAction } from '../action/cursor-action-creator';
 
 const defaultParams = {
-  top: 0,
-  left: 0,
-  zIndexCursor: 102,
-  zIndexOverlay: 100,
-  display: true
+  cursorImageUrl: './../assets/cursor.jpg',
+  cursorPos: {
+    top: 0,
+    left: 0,
+    width: 10,
+    height: 10,
+    zIndex: 100
+  },
+  overlayPos: {
+    top: 0,
+    left: 0,
+    widthPercent: 100,
+    heightPercent: 102,
+    zIndex: 100
+  },
+  display: false
 }
 
 export default class App extends React.Component {
-  render = () => (
-    <div>
-      <FakeCusorImpl
-        cursorImageUrl={'../assets/cursor.jpg'}
-        top={defaultParams.top} left={defaultParams.left} zIndex={defaultParams.zIndexCursor}
-        display={defaultParams.display} />
-      <TrueCursorOverlay
-        top={defaultParams.top} left={defaultParams.left} zIndex={defaultParams.zIndexOverlay}
-        widthPercent={100} heightPercent={100}
-      />
-    </div>
-    , document.getElementById('app'));
+  render() {
+    return (
+      <div>
+        <PseudoCursor
+          cursorImageUrl={defaultParams.cursorImageUrl} 
+          pos={defaultParams.cursorPos} 
+          display={defaultParams.display} />
+        <TrueCursorOverlay
+          pos={defaultParams.overlayPos} />
+      </div>
+    );
+  };
 };

@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
-import CursorEventReducer from './cursor-event-reducer';
+import cursorEventReducer from './cursor-event-reducer';
 
-const Reducers = combineReducers({
-  CursorEventReducer
+export const Reducers = combineReducers({
+  cursorEventReducer
 });
-
-export default Reducers;
