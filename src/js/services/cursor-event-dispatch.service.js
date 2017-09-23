@@ -40,7 +40,6 @@ const dispatchEvent = (event, instance, externalOpts) => {
  * @param {*} externalOpts: replace options of event
  */
 export const dispatchPseuduoEvent = (event, targetScreenCoordinates, refs, externalOpts) => {
-  console.log(searchRefElementsAtCoordinate(refs, targetScreenCoordinates));
   _.forEach(searchRefElementsAtCoordinate(refs, targetScreenCoordinates), (instance) => {
     dispatchEvent(event, instance);
   });

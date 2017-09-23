@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import PseudoCursor from './pseudo-cursor/pseudo-cursor';
-import TrueCursorOverlay from './pseudo-cursor/true-cursor-overlay';
+import CursorHijackOverlay from './cursor-hijack-overlay';
 import { createMouseMoveAction, createMouseClickAction, createMouseNoneAction } from '../action/cursor-action-creator';
 
 import SampleButton from '../sample-button';
@@ -13,20 +13,20 @@ const defaultParams = {
     left: 0,
     width: 10,
     height: 10,
-    zIndex: 100
+    zIndex: 1000
   },
   overlayPos: {
     top: 0,
     left: 0,
     widthPercent: 100,
-    heightPercent: 102,
-    zIndex: 100
+    heightPercent: 100,
+    zIndex: 1002
   },
   display: false
 }
 
 export default class App extends React.Component {
-  getAppRefs = () => (this.buttonRef)
+  getAppRefs = () => (this.refs)
 
   render() {
     return (
@@ -35,7 +35,7 @@ export default class App extends React.Component {
           cursorImageUrl={defaultParams.cursorImageUrl} 
           pos={defaultParams.cursorPos} 
           display={defaultParams.display} />
-        <TrueCursorOverlay
+        <CursorHijackOverlay
           pos={defaultParams.overlayPos}
           getAppRefs={this.getAppRefs} />
         <SampleButton ref="sampleButton" />

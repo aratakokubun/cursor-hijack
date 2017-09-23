@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as MouseActionCreators from '../../action/cursor-action-creator'
-import { dispatchPseuduoEvent } from '../../services/cursor-event-dispatch.service';
+import * as MouseActionCreators from '../action/cursor-action-creator'
+import { dispatchPseuduoEvent } from '../services/cursor-event-dispatch.service';
 
-class TrueCursorOverlay extends React.Component {
+class CursorHijackOverlay extends React.Component {
   // TODO: add all callback for mouse event
   // TODO: add flag to disable hijack
   static propTypes = {
@@ -67,4 +67,4 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(MouseActionCreators, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(TrueCursorOverlay);
+export default connect(null, mapDispatchToProps)(CursorHijackOverlay);

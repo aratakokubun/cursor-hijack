@@ -1,6 +1,22 @@
-# Restrictions
+# cursor-hijack
 
-1. You need to put refs tags for components inside.
+TODO
+
+## What is cursor-hijack?
+
+TODO
+
+## Why use cursor-hijack?
+
+TODO
+
+## How to use cursor-hijack?
+
+TODO
+
+## Restrictions
+
+1. Put refs tags for components inside.
   This library search elements with ref tag to dispatch event.
 
     In app.js and same manner for all child components.
@@ -22,5 +38,5 @@
         connect(mapStateFunc, mapDispatchFunc, mergeFunc, { withRef: true } /*Need option*/)(Component1)
       ```
 
-2. set more zIndex for true-cursor-overlay than all other components.
+2. Set more zIndex for true-cursor-overlay than all other components.
   This is because all mouse event have to be hooked by true-cursor-overlay, not by other components.

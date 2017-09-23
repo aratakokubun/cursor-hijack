@@ -27,6 +27,7 @@ module.exports = {
     new copyWebpack([
       { from: './assets/*', to: __dirname + '/public' },
       { from: './html/*', to: __dirname + '/public' },
+      { from: './css/*', to: __dirname + '/public' },
     ], {
         ignore: [
           // No ignore file specified

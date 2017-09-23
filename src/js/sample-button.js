@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import ActionTypes from './action/action-types';
 import assign from 'lodash.assign';
+import ActionTypes from './action/action-types';
 import { isCursorInScope } from './utils/action-type-utils';
 import { simulateMouseEvent } from './services/event-simulator.service';
 import { searchRefElementAtCoordinate } from './services/search-element.service';
@@ -48,9 +48,6 @@ class SampleButton extends React.Component {
     //   dom.focus();
     //   dom.click();
     // }
-    if (this.refs.SampleButton1 != undefined) {
-      console.log(this.refs.SampleButton1.getWrappedInstance().refs);
-    }
     return (
       <div>
         <input type="text" name="name" defaultValue="hoge" ref="hogeInput"/>

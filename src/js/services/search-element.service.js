@@ -27,14 +27,19 @@ const isElementAtCoordinate = (instance, absCoords) => {
  * @return {Dict{HTMLElement}}. empty if none of them matches condition.
  */
 const searchElementsRecursive = (refs, absCoords) => {
-  return _.map(refs, (ref) => {
-    const instance = ref2instance(ref);
-    if (!_.isEmpty(instance.refs)) {
-      return searchElementsRecursive(instance.refs, absCoords);
-    } else if(isElementAtCoordinate(instance, absCoords)) {
-      return ref;
-    }
-  });
+  const targets = _.chain(refs)
+    .map((ref) => {
+      const instance = ref2instance(ref);
+      if (!_.isEmpty(instance.refs)) {
+        return searchElementsRecursive(instance.refs, absCoords);
+      } else if (isElementAtCoordinate(instance, absCoords)) {
+        return ref;
+      }
+    })
+    .compact()
+    .flattenDeep()
+    .value();
+  return [].concat.apply(targets);
 }
 
 /**
