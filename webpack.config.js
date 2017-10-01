@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
   context: path.join(__dirname, 'src'),
   entry: {
-    client: "./js/index.js",
+    client: "./samples/index.js",
   },
   output: {
     filename: "[name].js",
