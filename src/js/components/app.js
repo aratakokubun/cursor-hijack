@@ -4,7 +4,9 @@ import PseudoCursor from './pseudo-cursor/pseudo-cursor';
 import CursorHijackOverlay from './cursor-hijack-overlay';
 import { createMouseMoveAction, createMouseClickAction, createMouseNoneAction } from '../action/cursor-action-creator';
 
+// FIXME': delete not needed libs
 import SampleButton from '../sample-button';
+import { dispatchEvent } from '../services/cursor-event-dispatch.service';
 
 const defaultParams = {
   cursorImageUrl: './../assets/cursor.jpg',
@@ -12,21 +14,21 @@ const defaultParams = {
     top: 0,
     left: 0,
     width: 10,
-    height: 10,
-    zIndex: 1000
+    height: 12,
+    zIndex: 100
   },
   overlayPos: {
     top: 0,
     left: 0,
     widthPercent: 100,
     heightPercent: 100,
-    zIndex: 1002
+    zIndex: 102
   },
   display: false
 }
 
 export default class App extends React.Component {
-  getAppRefs = () => (this.refs)
+  getAppRefs = () => (this.refs);
 
   render() {
     return (
@@ -38,7 +40,7 @@ export default class App extends React.Component {
         <CursorHijackOverlay
           pos={defaultParams.overlayPos}
           getAppRefs={this.getAppRefs} />
-        <SampleButton ref="sampleButton" />
+        <SampleButton ref="SampleButton" />
       </div>
     );
   };

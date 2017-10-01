@@ -6,7 +6,6 @@ import * as MouseActionCreators from '../action/cursor-action-creator'
 import { dispatchPseuduoEvent } from '../services/cursor-event-dispatch.service';
 
 class CursorHijackOverlay extends React.Component {
-  // TODO: add all callback for mouse event
   // TODO: add flag to disable hijack
   static propTypes = {
     getAppRefs: PropTypes.func.isRequired,
@@ -17,10 +16,7 @@ class CursorHijackOverlay extends React.Component {
       heightPercent: PropTypes.number.isRequired,
       zIndex: PropTypes.number.isRequired,
     }),
-    createMouseMoveAction: PropTypes.func,
-    createMouseOverAction: PropTypes.func,
-    createMouseOutAction: PropTypes.func,
-    createMouseClickAction: PropTypes.func,
+    createCursorEvent: PropTypes.func,
     debug: PropTypes.bool
   }
 
@@ -29,9 +25,10 @@ class CursorHijackOverlay extends React.Component {
   }
 
   _onMouseEvent = (event) => {
+    event.stopPropagation();
     // TODO: call change cursor position callback
     // FIXME: below is temporal test implemnetation
-    this.props.createMouseClickAction(event);
+    this.props.createCursorEvent(event);
     const targetCoordinates = {
       x: event.clientX,
       y: event.clientY
@@ -51,14 +48,19 @@ class CursorHijackOverlay extends React.Component {
       "cursor": this.props.debug ? "default" : "none",
     }
     return (
-      // TODO: Add all mouse event hook
-      // FIXME: below is temporal test implemnetation
       <div style={style}
-        onMouseMove={event => this.props.createMouseMoveAction(event)}
-        onMouseOver={event => this.props.createMouseOverAction(event)}
-        onClick={event => this._onMouseEvent(event)}
-        onMouseOut={event => this.props.createMouseOutAction(event)}>
-      </div>
+        onMouseMove   = {event => this._onMouseEvent(event)}
+        onMouseOver   = {event => this._onMouseEvent(event)}
+        onClick       = {event => this._onMouseEvent(event)}
+        onDoubleClick = {event => this._onMouseEvent(event)}
+        onContextMenu = {event => this._onMouseEvent(event)}
+        onMouseDown   = {event => this._onMouseEvent(event)}
+        onMouseUp     = {event => this._onMouseEvent(event)}
+        onMouseEnter  = {event => this._onMouseEvent(event)}
+        onMouseLeave  = {event => this._onMouseEvent(event)}
+        onMouseOut    = {event => this._onMouseEvent(event)}
+        onWheel       = {event => this._onMouseEvent(event)}
+        />
     );
   }
 }

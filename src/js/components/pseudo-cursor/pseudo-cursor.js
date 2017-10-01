@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import assign from 'lodash.assign';
-import ActionTypes from '../../action/action-types';
-import { isCursorInScope } from '../../utils/action-type-utils';
+import { isCursorInScope } from '../../utils/cursor-event.utils';
 
 class PseudoCursor extends React.Component {
 
@@ -57,15 +56,15 @@ class PseudoCursor extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => (
+  {
     pos: {
-      top: state.cursorEventReducer.cursorEvent.clientY,
-      left: state.cursorEventReducer.cursorEvent.clientX
+      top: state.cursorEventReducer.event.clientY,
+      left: state.cursorEventReducer.event.clientX
     },
-    display: isCursorInScope(state.cursorEventReducer.cursorState)
+    display: isCursorInScope(state.cursorEventReducer.event)
   }
-}
+)
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return Object.assign({}, ownProps, {
