@@ -1,10 +1,10 @@
 import ReactTestUtils from 'react-dom/test-utils';
 import * as _ from 'lodash';
-import * as format from 'string-format';
 import { createPseudoEvent, simulateMouseEvent } from './event-simulator.service';
 import { searchRefElementsAtCoordinate } from './search-element.service';
 import NotInterestedEventException from './exceptions/not-interested-event-exception';
 
+const format = require('string-format')
 const _try = require('try-catch-finally');
 
 /**
@@ -42,7 +42,7 @@ const readyDispatch = (instance, event) => {
       }
       return;
     default:
-      throw new NotInterestedEventException(format("event type {} is not target.", event.type), event.type);
+      throw new NotInterestedEventException(format("event type {0} is not target.", event.type), event.type);
   }
 }
 
@@ -50,6 +50,7 @@ const readyDispatch = (instance, event) => {
  * Simulate event according to event type
  * @param {HTMLElement} instance 
  * @param {MouseEvent} pseudoEvent: event to simulate
+ * @throws {NotInterestedEventException}: on event type is not included targe events.
  */
 const simulateEventSpecificFunc = (instance, pseudoEvent) => {
   switch (pseudoEvent.type) {

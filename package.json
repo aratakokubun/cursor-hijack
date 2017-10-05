@@ -30,6 +30,7 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-injector": "^0.1.0",
+    "sort-on": "^2.0.0",
     "string-format": "^0.5.0",
     "try-catch-finally": "^2.0.2"
   },

@@ -59,18 +59,18 @@ class PseudoCursor extends React.Component {
 const mapStateToProps = (state) => (
   {
     pos: {
-      top: state.cursorEventReducer.event.clientY,
-      left: state.cursorEventReducer.event.clientX
+      top: state.cursorEventReducer.clientY,
+      left: state.cursorEventReducer.clientX
     },
-    display: isCursorInScope(state.cursorEventReducer.event)
+    display: isCursorInScope(state.cursorEventReducer)
   }
 )
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    return Object.assign({}, ownProps, {
-      pos: Object.assign({}, ownProps.pos, stateProps.pos),
+const mergeProps = (stateProps, dispatchProps, ownProps) => (
+    assign({}, ownProps, {
+      pos: assign({}, ownProps.pos, stateProps.pos),
       display: stateProps.display
-    });
-};
+    })
+)
 
 export default connect(mapStateToProps, null, mergeProps)(PseudoCursor);

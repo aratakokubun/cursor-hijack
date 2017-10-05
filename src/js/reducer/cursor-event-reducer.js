@@ -5,17 +5,17 @@ import assign from 'lodash.assign';
 
 const createInitialState = () => (
   {
-    event: {
-      clientX: 0,
-      clientY: 0,
-      type: 'none'
-    }
+    clientX: 0,
+    clientY: 0,
+    type: 'none'
   }
 )
 
 const mergeState = (state, action) => (
   {
-    event: action.event
+    clientX: action.event.clientX,
+    clientY: action.event.clientY,
+    type: action.event.type
   }
 )
 

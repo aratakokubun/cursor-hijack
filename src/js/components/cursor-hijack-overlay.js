@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as MouseActionCreators from '../action/cursor-action-creator'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import assign from 'lodash.assign';
+import * as ActionCreators from '../action/action-creators';
 import { dispatchPseuduoEvent } from '../services/cursor-event-dispatch.service';
+import { distort } from '../services/distorter/cursor-distorter.service';
+import CursorPointer from '../services/distorter/cursor-pointer';
 
 class CursorHijackOverlay extends React.Component {
-  // TODO: add flag to disable hijack
+  // TODO: inject flag to disable hijack
   static propTypes = {
     getAppRefs: PropTypes.func.isRequired,
     pos: PropTypes.shape({
@@ -17,6 +20,7 @@ class CursorHijackOverlay extends React.Component {
       zIndex: PropTypes.number.isRequired,
     }),
     createCursorEvent: PropTypes.func,
+    distorters: PropTypes.array,
     debug: PropTypes.bool
   }
 
@@ -26,13 +30,19 @@ class CursorHijackOverlay extends React.Component {
 
   _onMouseEvent = (event) => {
     event.stopPropagation();
-    // TODO: call change cursor position callback
-    // FIXME: below is temporal test implemnetation
-    this.props.createCursorEvent(event);
+
+    console.log(event);
+    const orgPointer = new CursorPointer(
+      event.clientX - event.movementX, event.clientY - event.movementY,
+      event.clientX, event.clientY);
+    const distortedPointer = distort(this.props.distorters, orgPointer);
+
     const targetCoordinates = {
-      x: event.clientX,
-      y: event.clientY
+      x: distortedPointer.currentX,
+      y: distortedPointer.currentY,
     }
+
+    this.props.createCursorEvent(targetCoordinates, event.type);
     dispatchPseuduoEvent(event, targetCoordinates, this.props.getAppRefs());
   }
 
@@ -65,8 +75,18 @@ class CursorHijackOverlay extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => (
+  {
+    distorters: state.distorterEventReducer.distorters
+  }
+)
+
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(MouseActionCreators, dispatch);
+  return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(CursorHijackOverlay);
+const mergeProps = (stateProps, dispatchProps, ownProps) => (
+  assign({}, ownProps, dispatchProps, stateProps)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(CursorHijackOverlay);
