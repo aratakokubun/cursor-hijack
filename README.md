@@ -36,12 +36,18 @@ TODO
   2. Set more zIndex for true-cursor-overlay than all other components.
     This is because all mouse event have to be hooked by true-cursor-overlay, not by other components.
 
-
 ## Restrictions
 
   1. Default (real) cursor will be shown on dailogs(e.g. alert).
+
     If you want REALITY for a pseudo cursor, recommend not to use them.
 
-## Future implementations
+## Future improvements
 
-TODO
+  1. Distort cursor periodically
+
+    We will support distorting cursor periodically.
+
+  2. Distort cursor based on amount of move
+
+    We will support distorting cursor using amout of move.

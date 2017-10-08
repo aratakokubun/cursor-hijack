@@ -9,7 +9,9 @@ import * as _ from 'lodash';
 export const distort = (distorters, defaultPointer) => {
   let distortedPointer = defaultPointer;
   _.forEach(distorters, (distorter) => {
-    distortedPointer = distorter.distort(defaultPointer, distortedPointer);
+    if (distorter.isInRange(defaultPointer, distortedPointer)) {
+      distortedPointer = distorter.distort(defaultPointer, distortedPointer);
+    }
   })
   return distortedPointer;
 }

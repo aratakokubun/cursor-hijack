@@ -11,10 +11,10 @@ export const createCursorEvent = (coordinates, type) => (
   }
 );
 
-export const createDistorerEvent = (distorters) => (
+export const createAddDistorterEvent = (distorters) => (
   {
     type: ActionTypes.ADD_DISTORTER_EVENT,
-    distorter: distorters
+    distorters: distorters
   }
 )
 export const createDeleteDistorterEvent = (removeDistorters) => (

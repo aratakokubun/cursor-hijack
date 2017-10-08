@@ -7,16 +7,16 @@ export default class Distorter {
 
   /**
    * @param {string} key: unique key to identify object
-   * @param {int} priority: Priority to apply. LARGER is applied earlier than SMALLER.
+   * @param {number} priority: Priority to apply. LARGER is applied earlier than SMALLER.
    */
   constructor(key, priority) {
     this.key = key;
     this.priority = priority;
   }
   
-  getKey = () => (key)
+  getKey = () => (this.key)
 
-  getPriority = () => (priority)
+  getPriority = () => (this.priority)
   
   /**
    * Get is in the ditorted range.

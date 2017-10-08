@@ -31,7 +31,6 @@ class CursorHijackOverlay extends React.Component {
   _onMouseEvent = (event) => {
     event.stopPropagation();
 
-    console.log(event);
     const orgPointer = new CursorPointer(
       event.clientX - event.movementX, event.clientY - event.movementY,
       event.clientX, event.clientY);
