@@ -3,5 +3,5 @@
 .DS_Store
 .git
 *.org.*
-*sample*
+*sample-*.js
 

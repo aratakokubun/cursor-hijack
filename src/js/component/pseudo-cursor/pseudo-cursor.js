@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
@@ -15,8 +17,7 @@ class PseudoCursor extends React.Component {
       height: PropTypes.number.isRequired,
       zIndex: PropTypes.number.isRequired
     }),
-    display: PropTypes.bool.isRequired,
-    debug: PropTypes.bool
+    display: PropTypes.bool,
   }
 
   constructor(props) {
@@ -32,6 +33,7 @@ class PseudoCursor extends React.Component {
   }
 
   render() {
+    const display = this.props.display === false ? false : true;
     const style = {
       "position": "absolute",
       "top": this.props.pos.top,
@@ -40,7 +42,6 @@ class PseudoCursor extends React.Component {
       "height": this.props.pos.height,
       "zIndex": this.props.pos.zIndex,
       "display": this.props.display ? "inline" : "none",
-      "cursor": this.props.debug ? "default" : "none",
       "background": "transparent",
       "KhtmlUserSelect": "none",
       "OUserSelect": "none",

@@ -1,8 +1,10 @@
+'use strict';
+
 import ReactTestUtils from 'react-dom/test-utils';
 import * as _ from 'lodash';
 import { createPseudoEvent, simulateMouseEvent } from './event-simulator.service';
 import { searchRefElementsAtCoordinate } from './search-element.service';
-import NotInterestedEventException from './exceptions/not-interested-event-exception';
+import NotInterestedEventException from '../exceptions/not-interested-event-exception';
 
 const format = require('string-format')
 const _try = require('try-catch-finally');

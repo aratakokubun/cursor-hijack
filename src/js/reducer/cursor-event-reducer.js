@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import { handleActions } from 'redux-actions';
 import ActionTypes from '../action/action-types';

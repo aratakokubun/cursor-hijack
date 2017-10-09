@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/aratakokubun/cursor-jack#readme",
   "dependencies": {
-    "jquery": "^3.2.1",
     "lodash.assign": "^4.2.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
@@ -30,7 +29,6 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-injector": "^0.1.0",
-    "region": "^2.1.2",
     "sort-on": "^2.0.0",
     "string-format": "^0.5.0",
     "try-catch-finally": "^2.0.2"

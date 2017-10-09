@@ -1,4 +1,5 @@
 // TODO: Unit Test
+'use strict';
 
 import * as _ from 'lodash';
 import { ref2instance } from './ref-convert.service';

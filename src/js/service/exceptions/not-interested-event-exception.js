@@ -1,3 +1,5 @@
+'use strict';
+
 export default class NotInterestedEventException extends Error {
   constructor(message, eventType) {
     super(message);

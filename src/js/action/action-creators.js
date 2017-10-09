@@ -1,3 +1,5 @@
+'use strict';
+
 import ActionTypes from './action-types';
 
 export const createCursorEvent = (coordinates, type) => (

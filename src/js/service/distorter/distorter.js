@@ -1,3 +1,5 @@
+'use strict';
+
 import CursorPointer from './cursor-pointer';
 import NotImplementedException from '../exceptions/not-implemented-exception';
 

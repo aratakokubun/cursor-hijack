@@ -1,3 +1,5 @@
+'use strct';
+
 import * as _ from 'lodash';
 
 /**

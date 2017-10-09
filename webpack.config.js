@@ -5,11 +5,11 @@ const path = require('path');
 module.exports = {
   context: path.join(__dirname, 'src'),
   entry: {
-    client: "./samples/index.js",
+    client: "../samples/index.js",
   },
   output: {
     filename: "[name].js",
-    path: path.join(__dirname, '/public'),
+    path: path.join(__dirname, '/public/js'),
   },
   module: {
     loaders: [

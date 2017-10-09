@@ -1,8 +1,10 @@
+'use strict';
+
 import React from 'react';
 import { handleActions } from 'redux-actions';
 import ActionTypes from '../action/action-types';
 import * as _ from 'lodash';
-import Distorter from '../services/distorter/distorter';
+import Distorter from '../service/distorter/distorter';
 
 const format = require('string-format');
 const sortOn = require('sort-on');

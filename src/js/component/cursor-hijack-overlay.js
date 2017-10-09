@@ -1,12 +1,14 @@
+'use strict';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import assign from 'lodash.assign';
 import * as ActionCreators from '../action/action-creators';
-import { dispatchPseuduoEvent } from '../services/cursor-event-dispatch.service';
-import { distort } from '../services/distorter/cursor-distorter.service';
-import CursorPointer from '../services/distorter/cursor-pointer';
+import { dispatchPseuduoEvent } from '../service/event-dispatcher/cursor-event-dispatch.service';
+import { distort } from '../service/distorter/cursor-distorter.service';
+import CursorPointer from '../service/distorter/cursor-pointer';
 
 class CursorHijackOverlay extends React.Component {
   // TODO: inject flag to disable hijack

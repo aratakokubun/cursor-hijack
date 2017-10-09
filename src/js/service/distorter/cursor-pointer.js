@@ -1,4 +1,5 @@
-// Instead of struct
+'use strict';
+
 export default class CursorPointer {
   constructor(prevX, prevY, currentX, currentY) {
     this.prevX = prevX;
