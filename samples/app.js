@@ -2,10 +2,10 @@ import React from 'react';
 import { render } from 'react-dom';
 import CursorHijack from '../index';
 
-import SampleButton from './sample-button';
 import RepellingButton from './repelling-button';
 import ReversingArea from './reversing-area';
 import RandommoveArea from './randommove-area';
+import ForceChoiceButton from './force-choice-button';
 
 const defaultParams = {
   cursorImageUrl: '../assets/240x320-mac-osx-arrow-cursor.png',
@@ -37,6 +37,12 @@ const defaultParams = {
     width: 400,
     height: 200
   },
+  forceChoicePos: {
+    width: 400,
+    height: 200,
+    buttonWidth: 80,
+    buttonHeight: 40
+  },
   display: true
 }
 
@@ -62,6 +68,9 @@ export default class App extends React.Component {
         <RandommoveArea 
           ref="RandommoveArea"
           pos={defaultParams.automovePos}/>
+        <ForceChoiceButton 
+          ref="ForceChoiceButton"
+          pos={defaultParams.forceChoicePos}/>
       </div>
     );
   };
