@@ -8,21 +8,6 @@ import RandommoveArea from './randommove-area';
 import ForceChoiceButton from './force-choice-button';
 
 const defaultParams = {
-  cursorImageUrl: '../assets/240x320-mac-osx-arrow-cursor.png',
-  cursorPos: {
-    top: 0,
-    left: 0,
-    width: 16,
-    height: 24,
-    zIndex: 100
-  },
-  overlayPos: {
-    top: 0,
-    left: 0,
-    widthPercent: 100,
-    heightPercent: 100,
-    zIndex: 102
-  },
   buttonPos: {
     width: 200,
     height: 100,
@@ -43,7 +28,6 @@ const defaultParams = {
     buttonWidth: 80,
     buttonHeight: 40
   },
-  display: true
 }
 
 export default class App extends React.Component {
@@ -52,12 +36,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <CursorHijack.PseudoCursor
-          cursorImageUrl={defaultParams.cursorImageUrl} 
-          pos={defaultParams.cursorPos} 
-          display={defaultParams.display}/>
+        <CursorHijack.PseudoCursor/>
         <CursorHijack.CursorHijackOverlay
-          pos={defaultParams.overlayPos}
           getAppRefs={this.getAppRefs}/>
         <RepellingButton
           ref="RepellingButton"

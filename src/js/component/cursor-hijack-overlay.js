@@ -11,19 +11,33 @@ import { distort } from '../service/distorter/cursor-distorter.service';
 import CursorPointer from '../service/distorter/cursor-pointer';
 
 class CursorHijackOverlay extends React.Component {
-  // TODO: inject flag to disable hijack
   static propTypes = {
     getAppRefs: PropTypes.func.isRequired,
     pos: PropTypes.shape({
       top: PropTypes.number.isRequired,
       left: PropTypes.number.isRequired,
-      widthPercent: PropTypes.number.isRequired,
-      heightPercent: PropTypes.number.isRequired,
+    }),
+    shape: PropTypes.shape({
+      width: PropTypes.any.isRequired,
+      height: PropTypes.any.isRequired,
       zIndex: PropTypes.number.isRequired,
     }),
     createCursorEvent: PropTypes.func,
     distorters: PropTypes.array,
     debug: PropTypes.bool
+  }
+
+  static defaultProps = {
+    pos: {
+      top: 0,
+      left: 0,
+    },
+    shape: {
+      width: '100%',
+      height: '100%',
+      zIndex: 100,
+    },
+    debug: false
   }
 
   constructor(props) {
@@ -33,6 +47,7 @@ class CursorHijackOverlay extends React.Component {
   _onMouseEvent = (event) => {
     event.stopPropagation();
 
+    // Note: movement may not be taken correctly for now. This is future improvement.
     const orgPointer = new CursorPointer(
       event.clientX - event.movementX, event.clientY - event.movementY,
       event.clientX, event.clientY);
@@ -50,14 +65,10 @@ class CursorHijackOverlay extends React.Component {
   render() {
     const style = {
       "position": "fixed",
-      "top": this.props.pos.top,
-      "left": this.props.pos.left,
-      "width": this.props.pos.widthPercent + "%",
-      "height": this.props.pos.heightPercent + "%",
-      "zIndex": this.props.pos.zIndex,
       "background": "transparent",
       "cursor": this.props.debug ? "default" : "none",
-    }
+    };
+    _.merge(style, this.props.pos, this.props.shape);
     return (
       <div style={style}
         onMouseMove   = {event => this._onMouseEvent(event)}
@@ -82,12 +93,12 @@ const mapStateToProps = (state) => (
   }
 )
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(ActionCreators, dispatch);
-}
+const mapDispatchToProps = (dispatch) => (
+  bindActionCreators(ActionCreators, dispatch)
+)
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => (
   assign({}, ownProps, dispatchProps, stateProps)
-);
+)
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(CursorHijackOverlay);
