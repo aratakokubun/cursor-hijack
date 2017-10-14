@@ -70,10 +70,10 @@ class PseudoCursor extends React.Component {
 const mapStateToProps = (state) => (
   {
     pos: {
-      top: state.cursorEventReducer.clientY,
-      left: state.cursorEventReducer.clientX
+      top: state.cjk_cursorEventReducer.pointer.currentY,
+      left: state.cjk_cursorEventReducer.pointer.currentX
     },
-    display: isCursorInScope(state.cursorEventReducer)
+    display: isCursorInScope(state.cjk_cursorEventReducer)
   }
 )
 

@@ -19,52 +19,6 @@ class RepellingDistorter extends CursorHijack.Distorter {
     return range.left <= curX && curX <= range.right
            && range.top <= curY && curY <= range.bottom;
   }
-  
-  distortCosCurve = (defaultPointer, distortedPointer) => {
-    // distorted = sin(actual/width * pi/4) * width
-    const range = this.getRangeFunc();
-    const relativeX = distortedPointer.currentX - range.left;
-    const relativeY = distortedPointer.currentY - range.top;
-    const relativeCosX = (1 - Math.cos(Math.PI * (relativeX / range.width))) / 2;
-    const relativeCosY = (1 - Math.cos(Math.PI * (relativeY / range.height))) / 2;
-    const relativeCos2X = (1 - Math.cos(Math.PI * 2 * (relativeX / range.width))) / 2;
-    const relativeCos2Y = (1 - Math.cos(Math.PI * 2 * (relativeY / range.height))) / 2;
-    const distortDiffX = range.width * relativeCosX - relativeX;
-    const distortDiffY = range.height * relativeCosY - relativeY;
-    const distortedRelativeX = distortDiffX * relativeCos2Y + relativeX;
-    const distortedRelativeY = distortDiffY * relativeCos2X + relativeY;
-    const distortedX = distortedRelativeX + range.left;
-    const distortedY = distortedRelativeY + range.top;
-
-    return new CursorHijack.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, distortedX, distortedY);
-  }
-
-  distort5dFunc = (defaultPointer, distortedPointer) => {
-    // pseudo func
-    // x2 = x-1/2
-    // x3 = 32*x2^5 - 12*x2^3 + 2*x2 + 1/2
-    // on 0 <= x <=1
-    // then pseudoX = width * x3
-
-    const range = this.getRangeFunc();
-    const relativeX = distortedPointer.currentX - range.left;
-    const relativeY = distortedPointer.currentY - range.top;
-    const x2 = relativeX/range.width - 0.5;
-    const y2 = relativeY/range.height - 0.5;
-    const x3 = 32*Math.pow(x2, 5) - 12*Math.pow(x2, 3) + 2*x2 + 0.5;
-    const y3 = 32*Math.pow(y2, 5) - 12*Math.pow(y2, 3) + 2*y2 + 0.5;
-
-    const relativeCos2X = (1 - Math.cos(Math.PI * 2 * (relativeX / range.width))) / 2;
-    const relativeCos2Y = (1 - Math.cos(Math.PI * 2 * (relativeY / range.height))) / 2;
-    const distortDiffX = range.width * x3 - relativeX;
-    const distortDiffY = range.height * y3 - relativeY;
-    const distortedRelativeX = distortDiffX * relativeCos2Y + relativeX;
-    const distortedRelativeY = distortDiffY * relativeCos2X + relativeY;
-    const distortedX = distortedRelativeX + range.left;
-    const distortedY = distortedRelativeY + range.top;
-
-    return new CursorHijack.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, distortedX, distortedY);
-  }
 
   distortLineary = (defaultPointer, distortedPointer) => {
     const convertPoint = (wholeLength, repellingLeft, repellingLength, repellingRate, point) => {
@@ -102,8 +56,6 @@ class RepellingDistorter extends CursorHijack.Distorter {
   }
 
   distort = (defaultPointer, distortedPointer) => {
-    // return this.distortCosCurve(defaultPointer, distortedPointer);
-    // return this.distort5dFunc(defaultPointer, distortedPointer);
     return this.distortLineary(defaultPointer, distortedPointer);
   }
 }

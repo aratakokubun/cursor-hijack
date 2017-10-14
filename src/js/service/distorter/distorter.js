@@ -1,9 +1,8 @@
 'use strict';
 
-import CursorPointer from './cursor-pointer';
+import CursorPointer from '../../utils/cursor-pointer';
 import NotImplementedException from '../exceptions/not-implemented-exception';
-
-const format = require('string-format');
+import * as format from 'string-format';
 
 export default class Distorter {
 

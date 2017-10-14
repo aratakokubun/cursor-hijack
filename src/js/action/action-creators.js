@@ -2,12 +2,16 @@
 
 import ActionTypes from './action-types';
 
-export const createCursorEvent = (coordinates, type) => (
+/**
+ * Create mouse event.
+ * @param {CurosrPointer} pointer: CursorPointer for current mouse event
+ * @param {string} type: Mouse event type
+ */
+export const createCursorEvent = (pointer, type) => (
   {
     type: ActionTypes.CURSOR_EVENT,
     event: {
-      clientX: coordinates.x,
-      clientY: coordinates.y,
+      pointer: pointer,
       type: type
     }
   }

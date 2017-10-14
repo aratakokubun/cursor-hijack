@@ -17,7 +17,6 @@ const CursorHijack = {
   Reducers: Reducers,
   // Service  
   CursorDistorterService: Service.DistorterService.CursorDistorterService,
-  CursorPointer: Service.DistorterService.CursorPointer,
   Distorter: Service.DistorterService.Distorter,
   CursorEventDispatchService: Service.EventDispatcher.CursorEventDispatchService,
   EventSimulatorService: Service.EventDispatcher.EventSimulatorService,
@@ -30,6 +29,7 @@ const CursorHijack = {
   ObjectDuplicatedException: Service.Exceptions.ObjectDuplicatedException,
   // Utils
   CursorEventUtils: Utils.CursorEventUtils,
+  CursorPointer: Utils.CursorPointer,
   FuncExecutor: Utils.FuncExecutor,
 }
 export default CursorHijack;

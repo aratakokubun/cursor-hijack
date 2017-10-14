@@ -4,19 +4,18 @@ import React from 'react';
 import { handleActions } from 'redux-actions';
 import ActionTypes from '../action/action-types';
 import assign from 'lodash.assign';
+import CursorPointer from '../utils/cursor-pointer';
 
 const createInitialState = () => (
   {
-    clientX: 0,
-    clientY: 0,
+    pointer: new CursorPointer(0, 0, 0, 0),
     type: 'none'
   }
 )
 
 const mergeState = (state, action) => (
   {
-    clientX: action.event.clientX,
-    clientY: action.event.clientY,
+    pointer: action.event.pointer,
     type: action.event.type
   }
 )

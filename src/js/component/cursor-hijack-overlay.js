@@ -8,7 +8,7 @@ import assign from 'lodash.assign';
 import * as ActionCreators from '../action/action-creators';
 import { dispatchPseuduoEvent } from '../service/event-dispatcher/cursor-event-dispatch.service';
 import { distort } from '../service/distorter/cursor-distorter.service';
-import CursorPointer from '../service/distorter/cursor-pointer';
+import CursorPointer from '../utils/cursor-pointer';
 
 class CursorHijackOverlay extends React.Component {
   static propTypes = {
@@ -22,6 +22,7 @@ class CursorHijackOverlay extends React.Component {
       height: PropTypes.any.isRequired,
       zIndex: PropTypes.number.isRequired,
     }),
+    prevPointer: PropTypes.any,
     createCursorEvent: PropTypes.func,
     distorters: PropTypes.array,
     debug: PropTypes.bool
@@ -46,20 +47,20 @@ class CursorHijackOverlay extends React.Component {
 
   _onMouseEvent = (event) => {
     event.stopPropagation();
+    const nativeEvent = event.nativeEvent;
 
-    // Note: movement may not be taken correctly for now. This is future improvement.
     const orgPointer = new CursorPointer(
-      event.clientX - event.movementX, event.clientY - event.movementY,
-      event.clientX, event.clientY);
-    const distortedPointer = distort(this.props.distorters, orgPointer);
+      nativeEvent.clientX - nativeEvent.movementX, nativeEvent.clientY - nativeEvent.movementY,
+      nativeEvent.clientX, nativeEvent.clientY);
+    const distortedPointer = distort(this.props.distorters, orgPointer, this.props.prevPointer);
+
+    this.props.createCursorEvent(distortedPointer, nativeEvent.type);
 
     const targetCoordinates = {
       x: distortedPointer.currentX,
       y: distortedPointer.currentY,
     }
-
-    this.props.createCursorEvent(targetCoordinates, event.type);
-    dispatchPseuduoEvent(event, targetCoordinates, this.props.getAppRefs());
+    dispatchPseuduoEvent(nativeEvent, targetCoordinates, this.props.getAppRefs());
   }
 
   render() {
@@ -89,7 +90,8 @@ class CursorHijackOverlay extends React.Component {
 
 const mapStateToProps = (state) => (
   {
-    distorters: state.distorterEventReducer.distorters
+    prevPointer: state.cjk_cursorEventReducer.pointer,
+    distorters: state.cjk_distorterEventReducer.distorters,
   }
 )
 

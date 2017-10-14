@@ -5,9 +5,8 @@ import { handleActions } from 'redux-actions';
 import ActionTypes from '../action/action-types';
 import * as _ from 'lodash';
 import Distorter from '../service/distorter/distorter';
-
-const format = require('string-format');
-const sortOn = require('sort-on');
+import * as format from 'string-format';
+import * as sortOn from 'sort-on';
 
 const createInitialState = () => (
   {

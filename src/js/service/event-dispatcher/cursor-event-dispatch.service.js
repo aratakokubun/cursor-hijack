@@ -5,8 +5,7 @@ import * as _ from 'lodash';
 import { createPseudoEvent, simulateMouseEvent } from './event-simulator.service';
 import { searchRefElementsAtCoordinate } from './search-element.service';
 import NotInterestedEventException from '../exceptions/not-interested-event-exception';
-
-const format = require('string-format')
+import * as format from 'string-format';
 const _try = require('try-catch-finally');
 
 /**
@@ -116,6 +115,7 @@ export const dispatchEvent = (instance, event, externalOpts) => {
 }
 
 /**
+ * @deprecated
  * Dispatch native event to ref elements.
  * CAUTION: DO NOT USE REACT BECAUSE THIS MAY CREATE INIFITE CALLSTACK.
  * @param {HTMLElement} instance: React instance
@@ -137,10 +137,9 @@ export const dispatchNativeEvent = (instance, event, externalOpts) => {
 }
 
 /**
- * Inactivate focused element.
+ * Inactivate already focused element.
  */
 const inactivate = () => {
-  // TODO: body tag would be got deafult for activeElement. ignore it.
   const focused = document.activeElement;
   if (focused != undefined) {
     focused.blur();
