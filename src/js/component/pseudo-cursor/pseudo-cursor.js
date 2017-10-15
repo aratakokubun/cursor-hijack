@@ -10,8 +10,8 @@ class PseudoCursor extends React.Component {
   static propTypes = {
     cursorImageUrl: PropTypes.string.isRequired,
     pos: PropTypes.shape({
-      top: PropTypes.number,
       left: PropTypes.number,
+      top: PropTypes.number,
     }),
     shape: PropTypes.shape({
       width: PropTypes.number.isRequired,
@@ -24,8 +24,8 @@ class PseudoCursor extends React.Component {
   static defaultProps = {
     cursorImageUrl: '../assets/240x320-mac-osx-arrow-cursor.png',
     pos: {
-      top: 0,
       left: 0,
+      top: 0,
     },
     shape: {
       width: 16,
@@ -70,8 +70,8 @@ class PseudoCursor extends React.Component {
 const mapStateToProps = (state) => (
   {
     pos: {
-      top: state.cjk_cursorEventReducer.pointer.currentY,
-      left: state.cjk_cursorEventReducer.pointer.currentX
+      left: state.cjk_cursorEventReducer.pointer.currentX + window.scrollX,
+      top:  state.cjk_cursorEventReducer.pointer.currentY + window.scrollY,
     },
     display: isCursorInScope(state.cjk_cursorEventReducer)
   }

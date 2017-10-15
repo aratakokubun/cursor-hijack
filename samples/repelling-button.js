@@ -12,7 +12,7 @@ class RepellingDistorter extends CursorHijack.Distorter {
     this.getRepellingRangeFunc = getRepellingRangeFunc;
   }
 
-  isInRange = (defaultPointer, distortedPointer) => {
+  isInRange = (defaultPointer, distortedPointer, prevDistortedPointer) => {
     const range = this.getRangeFunc();
     const curX = distortedPointer.currentX;
     const curY = distortedPointer.currentY;
@@ -20,7 +20,7 @@ class RepellingDistorter extends CursorHijack.Distorter {
            && range.top <= curY && curY <= range.bottom;
   }
 
-  distortLineary = (defaultPointer, distortedPointer) => {
+  distortLineary = (defaultPointer, distortedPointer, prevDistortedPointer) => {
     const convertPoint = (wholeLength, repellingLeft, repellingLength, repellingRate, point) => {
       const aroundAreaRate = (wholeLength - repellingLength) / (wholeLength - repellingLength / repellingRate);
       const repellingRangeStart = repellingLeft + (1 - 1/repellingRate) * repellingLength/2;
@@ -36,7 +36,7 @@ class RepellingDistorter extends CursorHijack.Distorter {
       return convertedPoint;
     };
 
-    const repellingRate = 5.0;
+    const repellingRate = 6.0;
     const range = this.getRangeFunc();
     const repellingRange = this.getRepellingRangeFunc();
     const relativeX = distortedPointer.currentX - range.left;

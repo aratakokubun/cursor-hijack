@@ -12,6 +12,5 @@ export const executeFunctionByName = (funcNameSpaces, context) => {
   _.forEach(namespaces, (namespace) => {
     context = context[namespace];
   });
-  console.log(context[func]);
   return context[func].apply(context, args);
 }

@@ -7,4 +7,10 @@ export default class CursorPointer {
     this.currentX = currentX;
     this.currentY = currentY;
   }
+
+  getMoveX = () => (this.currentX - this.prevX)
+  getMoveY = () => (this.currentY - this.prevY)
+  clone = () => (
+    new CursorPointer(this.prevX, this.prevY, this.currentX, this.currentY)
+  )
 }

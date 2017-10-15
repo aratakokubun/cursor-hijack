@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import CursorHijack from '../index';
 
-class RandommoveDistorter extends CursorHijack.Distorter {
+class RandomeMoveDistorter extends CursorHijack.Distorter {
   constructor(key, priority, getRangeFunc) {
     super(key, priority);
     this.getRangeFunc = getRangeFunc;
@@ -20,7 +20,7 @@ class RandommoveDistorter extends CursorHijack.Distorter {
   }
 
   distort = (defaultPointer, distortedPointer) => {
-    const randomMoveRateX = 0.1*Math.random(), randomMoveRateY = 0.1*Math.random();
+    const randomMoveRateX = 0.1*(Math.random() - 0.5), randomMoveRateY = 0.1*(Math.random() - 0.5);
     const range = this.getRangeFunc();
     const relativeX = distortedPointer.currentX - range.left;
     const relativeY = distortedPointer.currentY - range.top;
@@ -31,7 +31,7 @@ class RandommoveDistorter extends CursorHijack.Distorter {
   }
 }
 
-class RandommoveArea extends React.Component {
+class RandomeMoveArea extends React.Component {
   static propTypes = {
     pos: PropTypes.shape({
       width: PropTypes.number.isRequired,
@@ -43,14 +43,14 @@ class RandommoveArea extends React.Component {
 
   constructor(props) {
     super(props);
-    this.distorter = new RandommoveDistorter('randommove-distorter', 100, this.getRangeFunc);
+    this.distorter = new RandomeMoveDistorter('randommove-distorter', 100, this.getRangeFunc);
   }
 
   render() {
     const style = {
       "width": this.props.pos.width,
       "height": this.props.pos.height,
-      "backgroundColor": "#9999ff",
+      "backgroundColor": "#ff99ff",
       "textAlign": "center"
     };
     return (
@@ -81,4 +81,4 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(CursorHijack.ActionCreators, dispatch);
 }
 
-export default connect(null, mapDispatchToProps, null, {withRef: true})(RandommoveArea);
+export default connect(null, mapDispatchToProps, null, {withRef: true})(RandomeMoveArea);

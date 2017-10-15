@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { handleActions } from 'redux-actions';
-import ActionTypes from '../action/action-types';
 import * as _ from 'lodash';
+import ActionTypes from '../action/action-types';
 import Distorter from '../service/distorter/distorter';
-import * as format from 'string-format';
+import format from 'string-format';
 import * as sortOn from 'sort-on';
 
 const createInitialState = () => (

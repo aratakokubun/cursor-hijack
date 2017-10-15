@@ -1,4 +1,3 @@
-// TODO: Unit Test
 'use strict';
 
 import * as _ from 'lodash';

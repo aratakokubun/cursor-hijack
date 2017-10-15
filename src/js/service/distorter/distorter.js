@@ -2,7 +2,7 @@
 
 import CursorPointer from '../../utils/cursor-pointer';
 import NotImplementedException from '../exceptions/not-implemented-exception';
-import * as format from 'string-format';
+import format from 'string-format';
 
 export default class Distorter {
 
@@ -21,21 +21,23 @@ export default class Distorter {
   
   /**
    * Get is in the ditorted range.
-   * @param {CursorPointer} defaultPointer: default position of cursor
+   * @param {CursorPointer} defaultPointer: default position of cursor on current event
    * @param {CursorPointer} distortedPointer: poisition of cursor distorted on current event
+   * @param {CursorPointer} distortedPointer: poisition of cursor distorted on previous event
    * @return {boolean}: true is in range, else false
    */
-  isInRange = (defaultPointer, distortedPointer) => {
+  isInRange = (defaultPointer, distortedPointer, prevDistortedPointer) => {
     throw NotImplementedException(format("isInRange is not implemented."));
   }
   
   /**
    * Distort cursor position.
-   * @param {CursorPointer} defaultPointer: default position of cursor
+   * @param {CursorPointer} defaultPointer: default position of cursor on current event
    * @param {CursorPointer} distortedPointer: poisition of cursor distorted on current event
+   * @param {CursorPointer} distortedPointer: poisition of cursor distorted on previous event
    * @return {CursorPointer}: position of cursor distorted on this distortor
    */
-  distort = (defaultPointer, distortedPointer) => {
+  distort = (defaultPointer, distortedPointer, prevDistortedPointer) => {
     // Return original position in this orginal class.
     // Distort position in extended class!
     return distortedPointer;

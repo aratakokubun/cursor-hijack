@@ -27,7 +27,7 @@ export const createPseudoEvent = (target, event, externalOpts) => {
     button: event.button,
     relatedTarget: event.relatedTarget,
   }
-  Object.assign(opts, externalOpts);
+  assign(opts, externalOpts);
 
   pseudoEvent.initMouseEvent(
       opts.type,

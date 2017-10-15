@@ -4,7 +4,7 @@
   "description": "This package support user to create application with hijacking cursor!",
   "main": "index.js",
   "scripts": {
-    "test": "ava -v"
+    "test": "ava -v -w"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,12 @@
     "url": "https://github.com/aratakokubun/cursor-jack/issues"
   },
   "homepage": "https://github.com/aratakokubun/cursor-jack#readme",
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
   "dependencies": {
     "lodash.assign": "^4.2.0",
     "prop-types": "^15.5.10",
@@ -45,6 +51,8 @@
     "findup-sync": "^2.0.0",
     "lodash": "^4.17.4",
     "mixin": "^0.2.0",
+    "rewire": "^2.5.2",
+    "sinon": "^4.0.1",
     "webpack": "^3.6.0",
     "yargs": "^8.0.2"
   }

@@ -5,8 +5,8 @@ import * as _ from 'lodash';
 import { createPseudoEvent, simulateMouseEvent } from './event-simulator.service';
 import { searchRefElementsAtCoordinate } from './search-element.service';
 import NotInterestedEventException from '../exceptions/not-interested-event-exception';
-import * as format from 'string-format';
-const _try = require('try-catch-finally');
+import format from 'string-format';
+import _try from 'try-catch-finally';
 
 /**
  * Get ready to dispatch event.

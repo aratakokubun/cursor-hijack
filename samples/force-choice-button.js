@@ -14,7 +14,7 @@ class ForceChoiceDistorter extends CursorHijack.Distorter {
     this.getNegativeRangeFunc = getNegativeRangeFunc;
   }
 
-  isInRange = (defaultPointer, distortedPointer) => {
+  isInRange = (defaultPointer, distortedPointer, prevDistortedPointer) => {
     const range = this.getRangeFunc();
     const curX = distortedPointer.currentX;
     const curY = distortedPointer.currentY;
@@ -22,7 +22,7 @@ class ForceChoiceDistorter extends CursorHijack.Distorter {
            && range.top <= curY && curY <= range.bottom;
   }
   
-  distort = (defaultPointer, distortedPointer) => {
+  distort = (defaultPointer, distortedPointer, prevDistortedPointer) => {
     const range = this.getRangeFunc();
     const positiveRange = this.getPositiveRangeFunc();
     const shrinkRate = 6.0;
