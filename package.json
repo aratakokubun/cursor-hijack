@@ -4,7 +4,7 @@
   "description": "This package support user to create application with hijacking cursor!",
   "main": "index.js",
   "scripts": {
-    "test": "ava -v -w"
+    "test": "ava -v"
   },
   "repository": {
     "type": "git",
