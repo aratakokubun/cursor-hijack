@@ -1,16 +1,17 @@
 [![Build Status](https://travis-ci.org/aratakokubun/cursor-hijack.svg?branch=master)](https://travis-ci.org/aratakokubun/cursor-hijack)
+[![Dependency Status](https://gemnasium.com/badges/github.com/aratakokubun/cursor-hijack.svg)](https://gemnasium.com/github.com/aratakokubun/cursor-hijack)
 
 # cursor-hijack
 
-TODO
+Library to hijack cursor and control it!
 
-## What is cursor-hijack?
+## What is cursor-hijack?　Why use cursor-hijack?
 
-TODO
+Cursor-hijack is react based library to enable hijack cursor and control it.
 
-## Why use cursor-hijack?
+You can create more attractive application with this library.
 
-TODO
+See [demo page](https://cursor-hijack-demo.appspot.com/demo)
 
 ## How to use cursor-hijack?
 
@@ -21,88 +22,100 @@ TODO
   2. Add 2 react components to your application.
 
       You need to pass function to CursorHijackOverlay to get Refs under application.
-        ```app.js(for exapmle)
-          // Import components from cursor-hijack
-          import { CursorHijackOverlay, PseudoCursor } from 'cursor-hijack';
-          ...
+      
+      ```app.js(for exapmle)
+        // Import components from cursor-hijack
+        import cjk from 'cursor-hijack';
+        ...
 
-          // Pass function to get refs under app.js
-          const getAppRefs = () => (this.refs)
+        // Pass function to get refs under app.js
+        const getAppRefs = () => (this.refs)
 
-          ...
-          const render = () => {
-            cursorPos: {/*your own styles here*/
-              top: 0,
-              left: 0,
-              width: 16,
-              height: 24,
-              zIndex: 100
-            },
-            overlayPos: {/*your own styles here*/
-              top: 0,
-              left: 0,
-              widthPercent: 100,
-              heightPercent: 100,
-              zIndex: 102
-            },
-            return
-              <div>
-                <PseudoCursor
-                  cursorImageUrl={cursorImage/*your own cursor image here*/} 
-                  pos={cursorPos}/>
-                <CursorHijackOverlay
-                  getAppRefs={this.getAppRefs}
-                  pos={overlayPos}
-                <Components /*other components*/ />
-              <div>
-          }
-          ...
-        ```
+        ...
+        const render = () => {
+          return
+            <div>
+              <cjk.PseudoCursor />
+              <cjk.CursorHijackOverlay
+                getAppRefs={this.getAppRefs} />
+              <!-- other components -->
+              <Component1 />
+              <Component2 />
+              ...
+            <div>
+        }
+        ...
+      ```
 
   3. Put refs tags for components inside.
 
-    This library search elements with ref tag to dispatch event.
-
+      This library search elements with ref tag to dispatch event.
       In app.js and same manner for all child components.
-        ```
-          ...
+    
+      ```
+        ...
+        <div>
+          <ChildComponent1 ref="child1"> Good! </ChildComponent1>
+          <ChildComponent2> Bad! You should not do this! </ChildComponent2>
+          <button ref="button1"> Good! </button>
           <div>
-            <ChildComponent1 ref="child1"> Good! </ChildComponent1>
-            <ChildComponent2> Bad! You should not do this! </ChildComponent2>
-            <button ref="button1"> Good! </button>
-            <div>
-              <ChildComponent3 ref="child3"> Good! </ChildComponent3>
-              <button ref="button2"> Good! </button>
-            </div>
+            <ChildComponent3 ref="child3"> Good! </ChildComponent3>
+            <button ref="button2"> Good! </button>
           </div>
-          ...
-        ```
+        </div>
+        ...
+      ```
 
       To add to this, you need to specify { withRef: true } for comoponets which use connect.
-        ```
-          connect(mapStateFunc, mapDispatchFunc, mergeFunc, { withRef: true } /*Need option*/)(Component1)
-        ```
+      ```
+        connect(mapStateFunc, mapDispatchFunc, mergeFunc, { withRef: true } /*Need option*/)(Component1)
+      ```
 
   4. Create store for cursor-hijack reducers
+      
+      ```
+      let store = createStore(CursorHijack.Reducers);
+      let rootElement = document.getElementById('app')
 
-     // TODO
+      render(
+        <Provider store={store}>
+          <div>
+            <App />
+          </div>
+        </Provider>,
+        rootElement
+      )
+      ```
 
   5. Set more zIndex for true-cursor-overlay than all other components.
 
     This is because all mouse event have to be hooked by true-cursor-overlay, not by other components.
+    
+  6. Create and set your own distoreter.
+ 
+    This is most important and difficult part.
+    Read instruction below carefully.
+    
+    TODO
 
 ## Restrictions
 
-  1. Default (real) cursor will be shown on dailogs(e.g. alert).
+  1. Default (real) cursor will be shown on dialogs(e.g. alert).
 
-    If you want REALITY for a pseudo cursor, recommend not to use them.
+  Cursor-hijack hide default cursor where cursor-hijack-overlay covers, but it does not cover dialog.
+  
+  If you want REALITY for a pseudo cursor, recommend not to use them.
+  
+## Samples
+
+This library includes some sample in [samples folder](https://github.com/aratakokubun/cursor-hijack/tree/master/samples)
+
+These samples are run in [demo page](https://cursor-hijack-demo.appspot.com/demo)
 
 ## Future improvements
 
-  1. Distort cursor periodically
+  - Distort cursor periodically even while no mouse events occur.
 
-    We will support distorting cursor periodically.
+## License
 
-  2. Distort cursor based on amount of move
-
-    We will support distorting cursor using amout of move.
+MIT
