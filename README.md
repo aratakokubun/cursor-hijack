@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/aratakokubun/cursor-hijack.svg?branch=master)](https://travis-ci.org/aratakokubun/cursor-hijack)
+
 # cursor-hijack
 
 TODO
