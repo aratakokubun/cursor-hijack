@@ -20,7 +20,7 @@ See [demo page](https://cursor-hijack-demo.appspot.com/demo)
 ## How to use cursor-hijack?
 
 1. install cursor-hijack with npm
-
+Currently I am not registering. Please wait for it.
 ```
 npm install cursor-hijack --save
 ```
