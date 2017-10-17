@@ -28,6 +28,7 @@ Then use *ReactTestUtils.Simulate* method to dispatch mouse event to the element
 ## How to use cursor-hijack?
 
 1. install cursor-hijack with npm
+
 Currently I am not registering. Please wait for it.
 ```
 npm install cursor-hijack --save
@@ -201,6 +202,7 @@ class ReversingArea extends React.Component {
 ```
 
 6. Check if the application runs.  
+
 Now you get ready to run application. Build and run your application and check the result!
 
 ## Customize
