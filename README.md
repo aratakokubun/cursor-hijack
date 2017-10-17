@@ -3,7 +3,7 @@
 
 # cursor-hijack
 
-Library to hijack cursor and control it!
+Library to hijack cursor and control it.
 
 ## What is cursor-hijack?　Why use cursor-hijack?
 
@@ -16,6 +16,14 @@ See [demo page](https://cursor-hijack-demo.appspot.com/demo)
 [![reverse](src/assets/demo/demo1.gif)](https://github.com/aratakokubun/cursor-hijack/)
 [![repell](src/assets/demo/demo2.gif)](https://github.com/aratakokubun/cursor-hijack/)
 [![randome](src/assets/demo/demo3.gif)](https://github.com/aratakokubun/cursor-hijack/)
+
+## How cursor-hijack works?
+
+*Cursor-hijack* hide original cursor with style *cursor: none* and display div with cursor image instead.  
+You can not control original cursor but can control (distort) div element.  
+
+All mouse event are handled by *[CursorHijackOverlay](https://github.com/aratakokubun/cursor-hijack/blob/master/src/js/component/cursor-hijack-overlay.js)*.  
+Then use *ReactTestUtils.Simulate* method to dispatch mouse event to the elements of distorted coordinates.
 
 ## How to use cursor-hijack?
 
@@ -193,11 +201,12 @@ class ReversingArea extends React.Component {
 ```
 
 6. Check if the application runs.  
-Finally, build and run your application and check the result!
+Now you get ready to run application. Build and run your application and check the result!
 
 ## Customize
 
-TODO
+You can use custom settings like a custom cursor image.  
+See propTypes for [PseudoCursor](https://github.com/aratakokubun/cursor-hijack/blob/master/src/js/component/pseudo-cursor/pseudo-cursor.js) and [CursorHijackOverlay](https://github.com/aratakokubun/cursor-hijack/blob/master/src/js/component/cursor-hijack-overlay.js).  
 
 ## Restrictions
 
@@ -211,6 +220,10 @@ If you want REALITY for a pseudo cursor, recommend not to use them.
 Cursor-hijack does not support some actions for ui components.
 I do not have any solutions for it.
 If you want to use it, please wait for update, sorry.
+
+3. Applicable only for react based application.
+
+This application has dependency on react.
 
 ## Future improvements
 
