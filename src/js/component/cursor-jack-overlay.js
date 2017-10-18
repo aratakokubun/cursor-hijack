@@ -10,7 +10,7 @@ import { dispatchPseuduoEvent } from '../service/event-dispatcher/cursor-event-d
 import { distort } from '../service/distorter/cursor-distorter.service';
 import CursorPointer from '../utils/cursor-pointer';
 
-class CursorHijackOverlay extends React.Component {
+class CursorJackOverlay extends React.Component {
   static propTypes = {
     getAppRefs: PropTypes.func.isRequired,
     pos: PropTypes.shape({
@@ -103,4 +103,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => (
   assign({}, ownProps, dispatchProps, stateProps)
 )
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(CursorHijackOverlay);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(CursorJackOverlay);

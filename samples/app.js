@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import CursorHijack from '../index';
+import cjk from '../index';
 
 import RepellingButton from './repelling-button';
 import ReversingArea from './reversing-area';
@@ -41,8 +41,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <CursorHijack.PseudoCursor/>
-        <CursorHijack.CursorHijackOverlay
+        <cjk.PseudoCursor/>
+        <cjk.CursorJackOverlay
           getAppRefs={this.getAppRefs}/>
 
         <RepellingButton

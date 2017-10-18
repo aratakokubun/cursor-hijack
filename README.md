@@ -1,13 +1,13 @@
 [![Build Status](https://travis-ci.org/aratakokubun/cursor-hijack.svg?branch=master)](https://travis-ci.org/aratakokubun/cursor-hijack)
 [![Dependency Status](https://gemnasium.com/badges/github.com/aratakokubun/cursor-hijack.svg)](https://gemnasium.com/github.com/aratakokubun/cursor-hijack)
 
-# cursor-hijack
+# cursor-jack
 
 Library to hijack cursor and control it.
 
-## What is cursor-hijack?　Why use cursor-hijack?
+## What is cursor-jack?　Why use cursor-jack?
 
-Cursor-hijack is react based library to enable hijack cursor and control it.
+cursor-jack is react based library to enable hijack cursor and control it.
 
 You can create more attractive application with this library.
 
@@ -17,31 +17,30 @@ See [demo page](https://cursor-hijack-demo.appspot.com/demo)
 [![repell](src/assets/demo/demo2.gif)](https://github.com/aratakokubun/cursor-hijack/)
 [![randome](src/assets/demo/demo3.gif)](https://github.com/aratakokubun/cursor-hijack/)
 
-## How cursor-hijack works?
+## How cursor-jack works?
 
-*Cursor-hijack* hide original cursor with style *cursor: none* and display div with cursor image instead.  
+*Cursor-jack* hide original cursor with style *cursor: none* and display div with cursor image instead.  
 You can not control original cursor but can control (distort) div element.  
 
 All mouse event are handled by *[CursorHijackOverlay](https://github.com/aratakokubun/cursor-hijack/blob/master/src/js/component/cursor-hijack-overlay.js)*.  
 Then use *ReactTestUtils.Simulate* method to dispatch mouse event to the elements of distorted coordinates.
 
-## How to use cursor-hijack?
+## How to use cursor-jack?
 
-1. install cursor-hijack with npm
+### 1. install cursor-jack with npm
 
-Currently I am not registering. Please wait for it.
 ```
-npm install cursor-hijack --save
+npm install cursor-jack --save
 ```
 
-2. Add 2 react components to your application.
+### 2. Add 2 react components to your application.
 
 You need to pass function to CursorHijackOverlay to get Refs under application.  
 [samples index.js](https://github.com/aratakokubun/cursor-hijack/tree/master/samples/index.js)
 
 ```app.js(for exapmle)
-  // Import components from cursor-hijack
-  import cjk from 'cursor-hijack';
+  // Import components from cursor-jack
+  import cjk from 'cursor-jack';
   ...
 
   // Pass function to get refs under app.js
@@ -63,7 +62,7 @@ You need to pass function to CursorHijackOverlay to get Refs under application.
   ...
 ```
 
-3. Put refs tags for components inside.
+### 3. Put refs tags for components inside.
 
 This library search elements with ref tag to dispatch event.  
 In app.js and same manner for all child components.  
@@ -87,7 +86,7 @@ To add to this, you need to specify { withRef: true } for comoponets which use c
   connect(mapStateFunc, mapDispatchFunc, mergeFunc, { withRef: true } /*Need option*/)(Component1)
 ```
 
-4. Create store for cursor-hijack reducers  
+### 4. Create store for cursor-jack reducers  
   [samples app.js](https://github.com/aratakokubun/cursor-hijack/tree/master/samples/app.js)
       
 ```
@@ -104,13 +103,13 @@ render(
 )
 ```
     
-5. Create and set your own distoreter.
+### 5. Create and set your own distoreter.
  
 <b>This is most important and difficult part.  
 Read instruction below and refert to samples.</b>
 
 In this part, I use [ReversingArea sample](https://github.com/aratakokubun/cursor-hijack/tree/master/samples/reversing-area.js) for explanation.  
-First, create distorter extends CursorHijack.Distorter  
+First, create distorter extends cursor-jack.Distorter  
 
 - Constructor
   - key  
@@ -135,7 +134,7 @@ Distort (change) coordinates of cursor to another.
 Should return new CursorHiack.CursorPointer for new coordinates.  
 
 ```
-class ReversingDistorter extends CursorHijack.Distorter {
+class ReversingDistorter extends cjk.Distorter {
   constructor(key, priority, getRangeFunc) {
     super(key, priority);
     this.getRangeFunc = getRangeFunc;
@@ -153,19 +152,19 @@ class ReversingDistorter extends CursorHijack.Distorter {
     const range = this.getRangeFunc();
     const relativeX = distortedPointer.currentX - range.left;
     const relativeY = distortedPointer.currentY - range.top;
-    return new CursorHijack.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, 
+    return new cjk.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, 
       range.width-relativeX+range.left, range.height-relativeY+range.top);
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(CursorHijack.ActionCreators, dispatch);
+  return bindActionCreators(cjk.ActionCreators, dispatch);
 }
 
 export default connect(null, mapDispatchToProps, null, {withRef: true})(ReversingArea);
 ```
 
-Then, bind CursorHijack.ActionCreators to component to merge event functions for add/delete distorters.
+Then, bind cursor-jack.ActionCreators to component to merge event functions for add/delete distorters.
 ```
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(CursorHijack.ActionCreators, dispatch);
@@ -176,7 +175,7 @@ export default connect(null, mapDispatchToProps, null, {withRef: true})(Reversin
 
 Finally, instantiate and dispatch add event.  
 When you finished to use the distorter, dispatch delete event.  
-You can add the distorter with createAddDistorterEvent and delete it with createDeleteDistorterEvent.  
+You can add the distorter with createAddDistorterEvent and delete it with createDeleteDistorterEvent, specifying distorter as array.
 
 ```
 class ReversingArea extends React.Component {
@@ -201,7 +200,7 @@ class ReversingArea extends React.Component {
 }
 ```
 
-6. Check if the application runs.  
+### 6. Check if the application runs.  
 
 Now you get ready to run application. Build and run your application and check the result!
 
@@ -214,12 +213,12 @@ See propTypes for [PseudoCursor](https://github.com/aratakokubun/cursor-hijack/b
 
 1. Default (real) cursor will be shown on dialogs(e.g. alert).
 
-Cursor-hijack hide default cursor where cursor-hijack-overlay covers, but it does not cover dialog.  
+cursor-jack hide default cursor where CursorJackOverlay covers, but it does not cover dialog.  
 If you want REALITY for a pseudo cursor, recommend not to use them.
-  
+
 2. Some actions for ui component do not occur(e.g. select test in input).
 
-Cursor-hijack does not support some actions for ui components.
+cursor-jack does not support some actions for ui components.
 I do not have any solutions for it.
 If you want to use it, please wait for update, sorry.
 
@@ -229,10 +228,10 @@ This application has dependency on react.
 
 ## Future improvements
 
-  - Distort cursor periodically even while no mouse events occur.
-  - Add more samples.
-    - I am now planning to create interactive UI combined with gl sl!
-  - Remove listed restrictions!
+- Distort cursor periodically even while no mouse events occur.
+- Add more samples.
+  - I am now planning to create interactive UI combined with gl sl!
+- Remove listed restrictions!
   
 ## Samples
 

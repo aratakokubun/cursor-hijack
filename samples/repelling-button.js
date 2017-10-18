@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import CursorHijack from '../index';
+import cjk from '../index';
 
-class RepellingDistorter extends CursorHijack.Distorter {
+class RepellingDistorter extends cjk.Distorter {
   constructor(key, priority, getRangeFunc, getRepellingRangeFunc) {
     super(key, priority);
     this.getRangeFunc = getRangeFunc;
@@ -52,7 +52,7 @@ class RepellingDistorter extends CursorHijack.Distorter {
     const distortedX = distortedRelativeX + range.left;
     const distortedY = distortedRelativeY + range.top;
 
-    return new CursorHijack.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, distortedX, distortedY);
+    return new cjk.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, distortedX, distortedY);
   }
 
   distort = (defaultPointer, distortedPointer) => {
@@ -131,7 +131,7 @@ class RepellingButton extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(CursorHijack.ActionCreators, dispatch);
+  return bindActionCreators(cjk.ActionCreators, dispatch);
 }
 
 export default connect(null, mapDispatchToProps, null, {withRef: true})(RepellingButton);

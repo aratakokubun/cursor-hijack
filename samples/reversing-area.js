@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import CursorHijack from '../index';
+import cjk from '../index';
 
-class ReversingDistorter extends CursorHijack.Distorter {
+class ReversingDistorter extends cjk.Distorter {
   constructor(key, priority, getRangeFunc) {
     super(key, priority);
     this.getRangeFunc = getRangeFunc;
@@ -23,7 +23,7 @@ class ReversingDistorter extends CursorHijack.Distorter {
     const range = this.getRangeFunc();
     const relativeX = distortedPointer.currentX - range.left;
     const relativeY = distortedPointer.currentY - range.top;
-    return new CursorHijack.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, 
+    return new cjk.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, 
       range.width-relativeX+range.left, range.height-relativeY+range.top);
   }
 }
@@ -75,7 +75,7 @@ class ReversingArea extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(CursorHijack.ActionCreators, dispatch);
+  return bindActionCreators(cjk.ActionCreators, dispatch);
 }
 
 export default connect(null, mapDispatchToProps, null, {withRef: true})(ReversingArea);

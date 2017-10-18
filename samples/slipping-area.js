@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import CursorHijack from '../index';
+import cjk from '../index';
 
-class SlippingDistorter extends CursorHijack.Distorter {
+class SlippingDistorter extends cjk.Distorter {
   constructor(key, priority, getRangeFunc) {
     super(key, priority);
     this.getRangeFunc = getRangeFunc;
@@ -37,7 +37,7 @@ class SlippingDistorter extends CursorHijack.Distorter {
     const relativeY = distortedPointer.currentY - range.top;
     const relativeCos2X = (1 - Math.cos(Math.PI * 2 * (relativeX / range.width))) / 2;
     const relativeCos2Y = (1 - Math.cos(Math.PI * 2 * (relativeY / range.height))) / 2;
-    return new CursorHijack.CursorPointer(
+    return new cjk.CursorPointer(
       distortedPointer.prevX, distortedPointer.prevY, 
       distortedPointer.currentX + distortDiffX * relativeCos2Y,
       distortedPointer.currentY + distortDiffY * relativeCos2X);
@@ -91,7 +91,7 @@ class SlippingArea extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(CursorHijack.ActionCreators, dispatch);
+  return bindActionCreators(cjk.ActionCreators, dispatch);
 }
 
 export default connect(null, mapDispatchToProps, null, {withRef: true})(SlippingArea);

@@ -5,7 +5,7 @@ import cjk_cursorEventReducer from './cursor-event-reducer';
 import cjk_distorterEventReducer from './distorter-event-reducer';
 
 // Add prefix 'cjk_' to avoid duplication.
-// 'cjk' is an abbreviation of 'cursor-hijack'.
+// 'cjk' is an abbreviation of 'cursor-jack'.
 export const Reducers = combineReducers({
   cjk_cursorEventReducer,
   cjk_distorterEventReducer

@@ -6,12 +6,12 @@ import Reducers from './src/js/reducer';
 import Service from './src/js/service';
 import Utils from './src/js/utils';
 
-const CursorHijack = {
+const CursorJack = {
   // Action
   ActionCreators: Action.ActionCreators,
   ActionTypes: Action.ActionTypes,
   // Component
-  CursorHijackOverlay: Component.CursorHijackOverlay,
+  CursorJackOverlay: Component.CursorJackOverlay,
   PseudoCursor: Component.PseudoCursor,
   // Reducer
   Reducers: Reducers,
@@ -32,4 +32,4 @@ const CursorHijack = {
   CursorPointer: Utils.CursorPointer,
   FuncExecutor: Utils.FuncExecutor,
 }
-export default CursorHijack;
+export default CursorJack;

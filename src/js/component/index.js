@@ -1,10 +1,10 @@
 'use strict';
 
-import CursorHijackOverlay from './cursor-hijack-overlay';
+import CursorJackOverlay from './cursor-jack-overlay';
 import PseudoCursor from './pseudo-cursor';
 
 const Component = {
-  CursorHijackOverlay: CursorHijackOverlay,
+  CursorJackOverlay: CursorJackOverlay,
   PseudoCursor: PseudoCursor
 }
 export default Component;

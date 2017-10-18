@@ -4,9 +4,9 @@ import ReactDom from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as assign from 'lodash.assign';
-import CursorHijack from '../index';
+import cjk from '../index';
 
-class ForceChoiceDistorter extends CursorHijack.Distorter {
+class ForceChoiceDistorter extends cjk.Distorter {
   constructor(key, priority, getRangeFunc, getPositiveRangeFunc, getNegativeRangeFunc) {
     super(key, priority);
     this.getRangeFunc = getRangeFunc;
@@ -38,7 +38,7 @@ class ForceChoiceDistorter extends CursorHijack.Distorter {
     const distortedRelativeX = distortDiffX * relativeCos2Y * relativeCos2X + relativeX;
     const distortedX = distortedRelativeX + range.left;
 
-    return new CursorHijack.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, distortedX, distortedPointer.currentY);
+    return new cjk.CursorPointer(distortedPointer.prevX, distortedPointer.prevY, distortedX, distortedPointer.currentY);
   }
 }
 
@@ -135,7 +135,7 @@ class ForceChoiceButton extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(CursorHijack.ActionCreators, dispatch);
+  return bindActionCreators(cjk.ActionCreators, dispatch);
 }
 
 export default connect(null, mapDispatchToProps, null, {withRef: true})(ForceChoiceButton);

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import CursorHijack from '../index';
+import cjk from '../index';
 
-class RandomeMoveDistorter extends CursorHijack.Distorter {
+class RandomeMoveDistorter extends cjk.Distorter {
   constructor(key, priority, getRangeFunc) {
     super(key, priority);
     this.getRangeFunc = getRangeFunc;
@@ -24,7 +24,7 @@ class RandomeMoveDistorter extends CursorHijack.Distorter {
     const range = this.getRangeFunc();
     const relativeX = distortedPointer.currentX - range.left;
     const relativeY = distortedPointer.currentY - range.top;
-    return new CursorHijack.CursorPointer(
+    return new cjk.CursorPointer(
       distortedPointer.prevX, distortedPointer.prevY, 
       distortedPointer.currentX + range.width * randomMoveRateX,
       distortedPointer.currentY + range.height * randomMoveRateY);
@@ -78,7 +78,7 @@ class RandomeMoveArea extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(CursorHijack.ActionCreators, dispatch);
+  return bindActionCreators(cjk.ActionCreators, dispatch);
 }
 
 export default connect(null, mapDispatchToProps, null, {withRef: true})(RandomeMoveArea);

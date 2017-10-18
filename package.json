@@ -1,6 +1,6 @@
 {
   "name": "cursor-jack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This package support user to create application with hijacking cursor!",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "cursor",
-    "hijack"
+    "jack"
   ],
   "author": "kkbnart",
   "license": "MIT",
